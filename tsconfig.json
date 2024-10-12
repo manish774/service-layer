@@ -3,7 +3,7 @@
       "outDir": "src/generate",
       "noImplicitAny": true,
       "module": "commonjs",
-      "target": "es5",
+      "target": "ES2015",
       "jsx": "react",
       "resolveJsonModule": true
     },

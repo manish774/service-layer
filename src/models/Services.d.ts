@@ -1,21 +1,12 @@
 export interface IServices {
   serviceName: string;
   serviceDomain: string;
-  configuration: (
-    | {
-        endpointName: string;
-        method: string;
-        url: string;
-        requestParam: {
-          name: string;
-          skills: string[];
-        };
-      }
-    | {
-        endpointName: string;
-        method: string;
-        url: string;
-        requestParam?: undefined;
-      }
-  )[];
+  configuration: config[];
+}
+
+export interface config {
+  endpointName: string;
+  method: string;
+  url: string;
+  requestParam: Record<any, any>;
 }

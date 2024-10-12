@@ -12,7 +12,12 @@
       }
     },
     {
-      "endpointName": "logout?id=123",
+      "endpointName": "logout",
+      "method": "GET",
+      "url": "/logout"
+    },
+    {
+      "endpointName": "token",
       "method": "GET",
       "url": "/logout"
     }
