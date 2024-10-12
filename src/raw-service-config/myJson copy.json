@@ -1,0 +1,16 @@
+{
+  "serviceName": "Register",
+  "serviceDomain": "https://localhost:3000",
+  "configuration": [
+    {
+      "endpointName": "Reigister",
+      "method": "POST",
+      "url": "/login",
+      "requestParam": {
+        "name": "manish",
+        "password": "jhjd3232",
+        "email": "mansih@msjs.com"
+      }
+    }
+  ]
+}

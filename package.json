@@ -1,0 +1,23 @@
+{
+  "name": "service-layer",
+  "version": "1.0.5",
+  "description": "\"Ui service\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "build": "ts-node ./src/config/initGeneration.ts",
+    "run": "node/Types.js",
+    "create:endpoint": "npm run build && npm run run"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2"
+  }
+}
