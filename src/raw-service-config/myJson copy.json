@@ -3,7 +3,7 @@
   "serviceDomain": "https://localhost:3000",
   "configuration": [
     {
-      "endpointName": "login",
+      "endpointName": "signup",
       "method": "POST",
       "url": "/login",
       "requestParam": {

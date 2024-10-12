@@ -1,10 +1,12 @@
 import { IServices } from "../models/Services";
 import { GFiles } from "./files";
+import { Indexes } from "./indexes";
 import { Services } from "./Services";
 import { Types } from "./Types";
 const types = new Types();
 const gfiles = new GFiles();
 const services = new Services();
+const indexes = new Indexes();
 
 export class Main {
   completeString: string;
@@ -26,7 +28,17 @@ export class Main {
       fileType: "servicegeneration",
     };
 
-    const results = await Promise.all([generatedTypes, generatedServices]);
+    const generateIndexFile = {
+      nameOfFile: serviceObject.serviceName,
+      content: await indexes.init(serviceObject),
+      fileType: "generateindexes",
+    };
+
+    const results = await Promise.all([
+      generatedTypes,
+      generatedServices,
+      generateIndexFile,
+    ]);
 
     results.map((x) => {
       if (x.fileType === "servicegeneration")
@@ -38,6 +50,13 @@ export class Main {
       if (x.fileType === "typegeneration") {
         gfiles.generate({
           fileName: `src/generated/models/${x.nameOfFile}.d.ts`,
+          code: x.content,
+        });
+      }
+
+      if (x.fileType === "generateindexes") {
+        gfiles.generate({
+          fileName: `src/generated/services/index.ts`,
           code: x.content,
         });
       }

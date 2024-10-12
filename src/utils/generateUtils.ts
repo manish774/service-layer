@@ -19,10 +19,10 @@ export const createTemplateLiteralForUrl = (templateString: string): string => {
   return modifiedString;
 };
 
-export const getLiterals = (apiName: string, url: string) => {
+export const getLiterals = (apiName: string, url: string, domain: string) => {
   return `\n\n
         export const  ${apiName} = async (props:${getFirstLetterAsCapital(apiName)}) =>{
-               const fetchData = await fetch(\`${createTemplateLiteralForUrl(url)}\`,{
+               const fetchData = await fetch(\`${domain}${createTemplateLiteralForUrl(url)}\`,{
                     method:'POST',
                     body: JSON.stringify(props)
                 })

@@ -8,7 +8,8 @@ export class Services {
   private async generate(xjson: IServices) {
     let str = "";
     xjson.configuration.map(
-      (xj) => (str += getLiterals(xj.endpointName, xj.url)),
+      (xj) =>
+        (str += getLiterals(xj.endpointName, xj.url, xjson.serviceDomain)),
     );
     return str;
   }
