@@ -15,7 +15,7 @@ export class Types {
   ): Promise<string> {
     const generatedTypes: string[] = [];
     function createInterface(obj: any, name: string) {
-      let interfaceStr = `export interface ${name.charAt(0).toUpperCase() + name.slice(1)} {\n`;
+      let interfaceStr = `export interface I${name.charAt(0).toUpperCase() + name.slice(1)} {\n`;
       for (const key in obj) {
         const value = obj[key];
         let type: string = typeof value;
@@ -59,7 +59,7 @@ export class Types {
   async init(json: IServices): Promise<string> {
     const typesArray = await Promise.all(
       structuredClone(json)?.configuration?.map(async (x) => {
-        delete x.url;
+        x?.url && delete x.url;
         return await this.generate(x.requestParam, x.endpointName);
       }),
     );

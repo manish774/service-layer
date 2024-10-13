@@ -19,15 +19,22 @@ export const createTemplateLiteralForUrl = (templateString: string): string => {
   return modifiedString;
 };
 
-export const getLiterals = (apiName: string, url: string, domain: string) => {
-  return `\n\n
-        export const  ${apiName} = async (props:${getFirstLetterAsCapital(apiName)}) =>{
-               const fetchData = await fetch(\`${domain}${createTemplateLiteralForUrl(url)}\`,{
-                    method:'POST',
-                    body: JSON.stringify(props)
-                })
-              const data = await fetchData.json()
-              return data;
+export const getLiterals = (
+  apiName: string,
+  url: string,
+  domain: string,
+  method: string,
+) => {
+  return method.toLocaleLowerCase() === "post"
+    ? `\n\n
+           async ${apiName}(props:I${getFirstLetterAsCapital(apiName)}){
+               const { data } = await axios.post(\`${domain}${createTemplateLiteralForUrl(url)}\`, props);
+               return data;
+    }`
+    : `\n\n
+           async ${apiName}(props:I${getFirstLetterAsCapital(apiName)}){
+               const { data } = await axios.get(\`${domain}${createTemplateLiteralForUrl(url)}\`, { params: props });
+               return data;
     }`;
 };
 

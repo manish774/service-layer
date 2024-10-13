@@ -1,12 +1,13 @@
 import { IServices } from "../models/Services";
 import { GFiles } from "./files";
-import { Indexes } from "./indexes";
+import { Indexes, RootIndex } from "./indexes";
 import { Services } from "./Services";
 import { Types } from "./Types";
 const types = new Types();
 const gfiles = new GFiles();
 const services = new Services();
 const indexes = new Indexes();
+const rootindex = new RootIndex();
 
 export class Main {
   completeString: string;
@@ -34,10 +35,17 @@ export class Main {
       fileType: "generateindexes",
     };
 
+    const generateRootIndexFile = {
+      nameOfFile: serviceObject.serviceName,
+      content: await rootindex.init(serviceObject),
+      fileType: "rootindex",
+    };
+
     const results = await Promise.all([
       generatedTypes,
       generatedServices,
       generateIndexFile,
+      generateRootIndexFile,
     ]);
 
     results.map((x) => {
@@ -57,6 +65,12 @@ export class Main {
       if (x.fileType === "generateindexes") {
         gfiles.generate({
           fileName: `src/generated/services/index.ts`,
+          code: x.content,
+        });
+      }
+      if (x.fileType === "rootindex") {
+        gfiles.generate({
+          fileName: `src/generated/index.ts`,
           code: x.content,
         });
       }

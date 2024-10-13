@@ -7,6 +7,6 @@ export interface IServices {
 export interface config {
   endpointName: string;
   method: string;
-  url: string;
+  url?: string;
   requestParam: Record<any, any>;
 }

@@ -30,9 +30,6 @@ class Initgeneration {
 
   async init() {
     const main = new Main();
-    const types = new Types();
-    const services = new Services();
-
     const jsons = await this.importAllJsons(
       path.resolve(__dirname, "../raw-service-config"),
     );

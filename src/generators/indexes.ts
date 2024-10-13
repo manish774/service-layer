@@ -3,11 +3,17 @@ import { IServices } from "../models/Services";
 export class Indexes {
   completeString: string = "";
   async generate(serviceObject: IServices) {
-    const serviceFuncNames = serviceObject.configuration.map(
-      (x) => x.endpointName,
-    );
+    return (this.completeString += `export {${serviceObject.serviceName}} from "./${serviceObject.serviceName}";`);
+  }
+  async init(serviceObject: IServices) {
+    return this.generate(serviceObject);
+  }
+}
 
-    return (this.completeString += `export {${serviceFuncNames}} from "./${serviceObject.serviceName}";`);
+export class RootIndex {
+  completeString: string = "";
+  async generate(serviceObject: IServices) {
+    return (this.completeString += `export * from "./services";`);
   }
   async init(serviceObject: IServices) {
     return this.generate(serviceObject);
